@@ -10,7 +10,7 @@ st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
 
 @st.cache_data
 def load_data():
-    # Prefer CSV; if not present, try SQLite
+    
     csv_path = Path("supermarket_sales.csv")
     if csv_path.exists():
         df = pd.read_csv(csv_path)
@@ -18,7 +18,7 @@ def load_data():
         eng = create_engine("sqlite:///retail_data.db")
         df = pd.read_sql("SELECT * FROM sales", eng)
 
-    # Clean types
+
     df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
     # Safety: if Total is str, coerce to float
     df["Total"] = pd.to_numeric(df["Total"], errors="coerce")
@@ -26,7 +26,7 @@ def load_data():
 
 df = load_data()
 
-# Sidebar filters
+
 st.sidebar.header("Filters")
 branches = st.sidebar.multiselect(
     "Branch", sorted(df["Branch"].dropna().unique()),
