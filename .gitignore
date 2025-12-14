@@ -1,5 +1,5 @@
 venv/
 __pycache__/
 *.pyc
-.retail_data.db
-.streamlit/
+.env
+.DS_Store
